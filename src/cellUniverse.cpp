@@ -26,16 +26,16 @@ const int CELL_MAX = INT_MAX/2;
 
 void universeInit()
 {
-    int** sub_cell_values_1 = new int*[VERSE_W];
+    sub_cell_values_1 = new int*[VERSE_W];
         for (int i = 0; i < VERSE_W; i++)
             sub_cell_values_1[i] = new int[VERSE_H];
-    int** sub_cell_values_2 = new int*[VERSE_W];
+    sub_cell_values_2 = new int*[VERSE_W];
         for (int i = 0; i < VERSE_W; i++)
             sub_cell_values_2[i] = new int[VERSE_H];
-    field_vector** sub_cell_fields_1 = new field_vector*[VERSE_W];
+    sub_cell_fields_1 = new field_vector*[VERSE_W];
         for (int i = 0; i < VERSE_W; i++)
             sub_cell_fields_1[i] = new field_vector[VERSE_H];
-    field_vector** sub_cell_fields_2 = new field_vector*[VERSE_W];
+    sub_cell_fields_2 = new field_vector*[VERSE_W];
         for (int i = 0; i < VERSE_W; i++)
             sub_cell_fields_2[i] = new field_vector[VERSE_H];
 }
