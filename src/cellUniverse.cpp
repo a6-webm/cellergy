@@ -30,24 +30,6 @@ field_vector (*prev_field_universe)[VERSE_W][VERSE_H];
 
 const int CELL_MAX = INT_MAX/2;
 
-// void universeInit()
-// {
-//     sub_cell_values_1 = new int*[VERSE_W];
-//         for (int i = 0; i < VERSE_W; i++)
-//             sub_cell_values_1[i] = new int[VERSE_H];
-//     sub_cell_values_2 = new int*[VERSE_W];
-//         for (int i = 0; i < VERSE_W; i++)
-//             sub_cell_values_2[i] = new int[VERSE_H];
-//     sub_cell_fields_1 = new field_vector*[VERSE_W];
-//         for (int i = 0; i < VERSE_W; i++)
-//             sub_cell_fields_1[i] = new field_vector[VERSE_H];
-//     sub_cell_fields_2 = new field_vector*[VERSE_W];
-//         for (int i = 0; i < VERSE_W; i++)
-//             sub_cell_fields_2[i] = new field_vector[VERSE_H];
-    
-//     isInit = true;
-// }
-
 // Simulates the action of the cell at coordinates (x,y)
 void sim_cell(int x, int y)
 {
@@ -56,8 +38,6 @@ void sim_cell(int x, int y)
 
 void step()
 {
-    // if (!isInit) universeInit();
-
     // Swap current universe
     isUniverse1 = !isUniverse1;
     if (isUniverse1)

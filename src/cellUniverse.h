@@ -6,9 +6,6 @@ const int VERSE_H = 5;
 
 
 
-// // Initialises variables
-// void universeInit();
-
 // Performs one time step of the universe
 void step();
 
