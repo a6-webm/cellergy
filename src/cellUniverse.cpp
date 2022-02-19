@@ -31,7 +31,7 @@ field_vector (*prev_field_universe)[VERSE_W][VERSE_H];
 const int CELL_MAX = INT_MAX/2;
 
 // Simulates the action of the cell at coordinates (x,y)
-void sim_cell(int x, int y)
+void sim_cell(int x, int y) // [ ] What even are we trying to do with the sim_cell() function lmao
 {
     
 }
