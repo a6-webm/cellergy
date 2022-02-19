@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <climits>
+#include <iostream>
 
 typedef struct field_vector
 {
@@ -83,3 +84,53 @@ void sim_cell(int x, int y)
 {
     
 }
+
+
+#ifdef _DEBUG
+void versePrint(int*** verse)
+{
+    for (int i = 0; i < VERSE_W; i++)
+    {
+        for (int j = 0; j < VERSE_H; j++)
+        {
+            std::cout << (*verse)[i][j] << "|";
+        }
+        std::cout << std::endl;
+    }
+    
+}
+
+void versePrint(field_vector*** verse)
+{
+    for (int i = 0; i < VERSE_W; i++)
+    {
+        std::cout << "|";
+        for (int j = 0; j < VERSE_H; j++)
+        {
+            std::cout << (*verse)[i][j].x << "," << (*verse)[i][j].y << "|";
+        }
+        std::cout << std::endl;
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    int** mySubVerse = new int*[VERSE_W];
+        for (int i = 0; i < VERSE_W; i++)
+            mySubVerse[i] = new int[VERSE_H];
+
+    for (int i = 0; i < VERSE_W; i++)
+    {
+        for (int j = 0; j < VERSE_H; j++)
+        {
+            mySubVerse[i][j] = i * j;
+        }
+    }
+    
+    int**** myVerse;
+    *myVerse = &mySubVerse;
+
+    versePrint(*myVerse);
+    return 0;
+}
+#endif
