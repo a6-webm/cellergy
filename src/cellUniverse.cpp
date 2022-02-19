@@ -70,7 +70,7 @@ const int (*const *getCellUniverse())[VERSE_W][VERSE_H] // [ ] test if this is t
 }
 
 
-#ifdef _DEBUG
+#ifdef _DEBUG_cellUniverse
 void versePrint(int (*verse)[VERSE_W][VERSE_H])
 {
     for (int i = 0; i < VERSE_W; i++)

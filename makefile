@@ -11,4 +11,4 @@ debug: src/*.cpp
 
 %: src/%.cpp
 	[ -e "out/debug_$@" ] || mkdir "out/debug_$@"; \
-	$(CC) -D_DEBUG -Wall src/$@.cpp -o out/debug_$@/$@ && ./out/debug_$@/$@
+	$(CC) -D_DEBUG_$@ -Wall src/$@.cpp -o out/debug_$@/$@ && ./out/debug_$@/$@
