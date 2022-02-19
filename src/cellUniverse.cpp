@@ -3,6 +3,7 @@
 #include <string.h>
 #include <climits>
 #include <iostream>
+#include "cellUniverse.h"
 
 typedef struct field_vector
 {
@@ -13,36 +14,39 @@ typedef struct field_vector
 
 bool isInit {false};
 bool isUniverse1 { false };
-const int VERSE_W = 5;
-const int VERSE_H = 5;
-int** sub_cell_values_1;
-int** sub_cell_values_2;
-field_vector** sub_cell_fields_1;
-field_vector** sub_cell_fields_2;
-int*** cell_universe;
-field_vector*** field_universe;
-int*** prev_cell_universe;
-field_vector*** prev_field_universe;
+
+const int VERSE_W;
+const int VERSE_H;
+
+int sub_cell_values_1[VERSE_W][VERSE_H];
+int sub_cell_values_2[VERSE_W][VERSE_H];
+field_vector sub_cell_fields_1[VERSE_W][VERSE_H];
+field_vector sub_cell_fields_2[VERSE_W][VERSE_H];
+
+int (*cell_universe)[VERSE_W][VERSE_H];
+field_vector (*field_universe)[VERSE_W][VERSE_H];
+int (*prev_cell_universe)[VERSE_W][VERSE_H];
+field_vector (*prev_field_universe)[VERSE_W][VERSE_H];
 
 const int CELL_MAX = INT_MAX/2;
 
-void universeInit()
-{
-    sub_cell_values_1 = new int*[VERSE_W];
-        for (int i = 0; i < VERSE_W; i++)
-            sub_cell_values_1[i] = new int[VERSE_H];
-    sub_cell_values_2 = new int*[VERSE_W];
-        for (int i = 0; i < VERSE_W; i++)
-            sub_cell_values_2[i] = new int[VERSE_H];
-    sub_cell_fields_1 = new field_vector*[VERSE_W];
-        for (int i = 0; i < VERSE_W; i++)
-            sub_cell_fields_1[i] = new field_vector[VERSE_H];
-    sub_cell_fields_2 = new field_vector*[VERSE_W];
-        for (int i = 0; i < VERSE_W; i++)
-            sub_cell_fields_2[i] = new field_vector[VERSE_H];
+// void universeInit()
+// {
+//     sub_cell_values_1 = new int*[VERSE_W];
+//         for (int i = 0; i < VERSE_W; i++)
+//             sub_cell_values_1[i] = new int[VERSE_H];
+//     sub_cell_values_2 = new int*[VERSE_W];
+//         for (int i = 0; i < VERSE_W; i++)
+//             sub_cell_values_2[i] = new int[VERSE_H];
+//     sub_cell_fields_1 = new field_vector*[VERSE_W];
+//         for (int i = 0; i < VERSE_W; i++)
+//             sub_cell_fields_1[i] = new field_vector[VERSE_H];
+//     sub_cell_fields_2 = new field_vector*[VERSE_W];
+//         for (int i = 0; i < VERSE_W; i++)
+//             sub_cell_fields_2[i] = new field_vector[VERSE_H];
     
-    isInit = true;
-}
+//     isInit = true;
+// }
 
 // Simulates the action of the cell at coordinates (x,y)
 void sim_cell(int x, int y)
@@ -52,7 +56,7 @@ void sim_cell(int x, int y)
 
 void step()
 {
-    if (!isInit) universeInit();
+    // if (!isInit) universeInit();
 
     // Swap current universe
     isUniverse1 = !isUniverse1;
@@ -71,8 +75,8 @@ void step()
     }
     
     // Clear new universe
-    memset(*cell_universe, 0, sizeof(cell_universe)); // TODO test if this actually clears this (you are in the process of doing this in _DEBUG main)
-    memset(*field_universe, 0, sizeof(field_universe));
+    memset(*cell_universe, 0, sizeof(*cell_universe)); // [x] test if this actually clears this
+    memset(*field_universe, 0, sizeof(*field_universe));
     
     // Simulate
     for (int i_x = 0; i_x < VERSE_W; ++i_x)
@@ -80,9 +84,9 @@ void step()
             sim_cell(i_x,i_y);
 }
 
-const int** const** getCellUniverse() // TODO test if this is the correct return type
+const int (*const *getCellUniverse())[VERSE_W][VERSE_H] // [ ] test if this is the correct return type
 {
-    return (const int** const**)cell_universe;
+    return (const int (* const*)[VERSE_W][VERSE_H])&cell_universe;
 }
 
 
@@ -115,10 +119,6 @@ void versePrint(field_vector (*verse)[VERSE_W][VERSE_H])
 
 int main(int argc, char const *argv[])
 {
-    // int** mySubVerse = new int*[VERSE_W];
-    //     for (int i = 0; i < VERSE_W; i++)
-    //         mySubVerse[i] = new int[VERSE_H];
-
     int mySubVerse[VERSE_W][VERSE_H];
 
     for (int i = 0; i < VERSE_W; i++)
