@@ -13,8 +13,8 @@ typedef struct field_vector
 
 bool isInit {false};
 bool isUniverse1 { false };
-const int VERSE_W = 400;
-const int VERSE_H = 200;
+const int VERSE_W = 5;
+const int VERSE_H = 5;
 int** sub_cell_values_1;
 int** sub_cell_values_2;
 field_vector** sub_cell_fields_1;
@@ -42,6 +42,12 @@ void universeInit()
             sub_cell_fields_2[i] = new field_vector[VERSE_H];
     
     isInit = true;
+}
+
+// Simulates the action of the cell at coordinates (x,y)
+void sim_cell(int x, int y)
+{
+    
 }
 
 void step()
@@ -74,15 +80,9 @@ void step()
             sim_cell(i_x,i_y);
 }
 
-const int**** getCellUniverse()
+const int** const** getCellUniverse()
 {
-    return cell_universe;
-}
-
-// Simulates the action of the cell at coordinates (x,y)
-void sim_cell(int x, int y)
-{
-    
+    return (const int** const**)cell_universe;
 }
 
 
@@ -127,10 +127,10 @@ int main(int argc, char const *argv[])
         }
     }
     
-    int**** myVerse;
-    *myVerse = &mySubVerse;
+    int*** myVerse;
+    myVerse = &mySubVerse;
 
-    versePrint(*myVerse);
+    versePrint(myVerse);
     return 0;
 }
 #endif

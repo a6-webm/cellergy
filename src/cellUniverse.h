@@ -8,4 +8,4 @@ void step();
 void setCellUniverse(const int** provided);
 
 // Get a pointer to a pointer to the current cell universe
-const int**** getCellUniverse();
+const int** const** getCellUniverse();
