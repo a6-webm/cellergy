@@ -19,10 +19,10 @@ int** sub_cell_values_1;
 int** sub_cell_values_2;
 field_vector** sub_cell_fields_1;
 field_vector** sub_cell_fields_2;
-int**** cell_universe;
-field_vector**** field_universe;
-int**** prev_cell_universe;
-field_vector**** prev_field_universe;
+int*** cell_universe;
+field_vector*** field_universe;
+int*** prev_cell_universe;
+field_vector*** prev_field_universe;
 
 const int CELL_MAX = INT_MAX/2;
 
@@ -58,21 +58,21 @@ void step()
     isUniverse1 = !isUniverse1;
     if (isUniverse1)
     {
-        *cell_universe = &sub_cell_values_1;
-        *prev_cell_universe = &sub_cell_values_2;
-        *field_universe = &sub_cell_fields_1;
-        *prev_field_universe = &sub_cell_fields_2;
+        cell_universe = &sub_cell_values_1;
+        prev_cell_universe = &sub_cell_values_2;
+        field_universe = &sub_cell_fields_1;
+        prev_field_universe = &sub_cell_fields_2;
     } else
     {
-        *cell_universe = &sub_cell_values_2;
-        *prev_cell_universe = &sub_cell_values_1;
-        *field_universe = &sub_cell_fields_2;
-        *prev_field_universe = &sub_cell_fields_1;
+        cell_universe = &sub_cell_values_2;
+        prev_cell_universe = &sub_cell_values_1;
+        field_universe = &sub_cell_fields_2;
+        prev_field_universe = &sub_cell_fields_1;
     }
     
     // Clear new universe
-    memset(**cell_universe, 0, sizeof(cell_universe)); // TODO test if this actually clears this
-    memset(**field_universe, 0, sizeof(field_universe));
+    memset(*cell_universe, 0, sizeof(cell_universe)); // TODO test if this actually clears this (you are in the process of doing this in _DEBUG main)
+    memset(*field_universe, 0, sizeof(field_universe));
     
     // Simulate
     for (int i_x = 0; i_x < VERSE_W; ++i_x)
@@ -80,14 +80,14 @@ void step()
             sim_cell(i_x,i_y);
 }
 
-const int** const** getCellUniverse()
+const int** const** getCellUniverse() // TODO test if this is the correct return type
 {
     return (const int** const**)cell_universe;
 }
 
 
 #ifdef _DEBUG
-void versePrint(int*** verse)
+void versePrint(int (*verse)[VERSE_W][VERSE_H])
 {
     for (int i = 0; i < VERSE_W; i++)
     {
@@ -100,7 +100,7 @@ void versePrint(int*** verse)
     
 }
 
-void versePrint(field_vector*** verse)
+void versePrint(field_vector (*verse)[VERSE_W][VERSE_H])
 {
     for (int i = 0; i < VERSE_W; i++)
     {
@@ -115,9 +115,11 @@ void versePrint(field_vector*** verse)
 
 int main(int argc, char const *argv[])
 {
-    int** mySubVerse = new int*[VERSE_W];
-        for (int i = 0; i < VERSE_W; i++)
-            mySubVerse[i] = new int[VERSE_H];
+    // int** mySubVerse = new int*[VERSE_W];
+    //     for (int i = 0; i < VERSE_W; i++)
+    //         mySubVerse[i] = new int[VERSE_H];
+
+    int mySubVerse[VERSE_W][VERSE_H];
 
     for (int i = 0; i < VERSE_W; i++)
     {
@@ -126,11 +128,18 @@ int main(int argc, char const *argv[])
             mySubVerse[i][j] = i * j;
         }
     }
-    
-    int*** myVerse;
+
+    int (*myVerse)[VERSE_W][VERSE_H];
+    int (*myVerse2)[VERSE_W][VERSE_H];
     myVerse = &mySubVerse;
+    myVerse2 = &mySubVerse;
+
 
     versePrint(myVerse);
+
+    memset(*myVerse, 0, sizeof(*myVerse));
+    versePrint(myVerse2);
+
     return 0;
 }
 #endif
