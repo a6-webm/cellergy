@@ -5,7 +5,7 @@ void universeInit();
 void step();
 
 // Set the current universe
-void setCellUniverse(const unsigned short** provided);
+void setCellUniverse(const int** provided);
 
-// Get reference to the array currently acting as the current cell universe
-const unsigned short** getCellUniverse();
+// Get a pointer to a pointer to the current cell universe
+const int**** getCellUniverse();
