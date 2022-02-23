@@ -7,6 +7,12 @@
 
 int main(void)
 {
+    
+    return 0;
+}
+
+void raylibUIExample()
+{
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(60);
 
@@ -30,6 +36,4 @@ int main(void)
     }
 
     CloseWindow();
-
-    return 0;
 }
