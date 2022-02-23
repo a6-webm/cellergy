@@ -1,13 +1,30 @@
 #include "raylib.h"
+#include "cellUniverse.hpp"
+#include <iostream>
 
 #define SCREEN_WIDTH (800)
 #define SCREEN_HEIGHT (450)
 
 #define WINDOW_TITLE "Window title"
 
-int main(void)
+void raylibUIExample();
+
+int main()
 {
-    
+    int initVerse[VERSE_W][VERSE_H];
+
+    for (int i = 0; i < VERSE_W; ++i)
+        for (int j = 0; j < VERSE_H; ++j)
+            initVerse[i][j] = i * j;
+
+    setCellUniverse(initVerse);
+
+    for (int i = 0; i < VERSE_W; ++i)
+    {
+        for (int j = 0; j < VERSE_H; ++j)
+            std::cout << getCellUniverseRef()[i][j] << "|";
+        std::cout << std::endl;
+    }
     return 0;
 }
 
