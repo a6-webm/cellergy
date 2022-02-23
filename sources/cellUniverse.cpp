@@ -28,13 +28,14 @@ field_vector (*prev_field_universe)[VERSE_W][VERSE_H];
 const int CELL_MAX = INT_MAX/2;
 
 // Simulates the action of the cell at coordinates (x,y)
-void sim_cell(int x, int y) // [ ] What even are we trying to do with the sim_cell() function lmao
+void sim_cell(int x, int y) // TODO What even are we trying to do with the sim_cell() function lmao
 {
 
 }
 
 void step()
 {
+    std::cout << "sus" << std::endl;
     // Swap current universe
     isUniverse1 = !isUniverse1;
     if (isUniverse1)
@@ -52,7 +53,7 @@ void step()
     }
 
     // Clear new universe
-    memset(*cell_universe, 0, sizeof(*cell_universe)); // [x] test if this actually clears this
+    memset(*cell_universe, 0, sizeof(*cell_universe)); // TODONE test if this actually clears this
     memset(*field_universe, 0, sizeof(*field_universe));
 
     // Simulate
@@ -61,13 +62,18 @@ void step()
             sim_cell(i_x,i_y);
 }
 
-const int (*const *getCellUniverse())[VERSE_W][VERSE_H] // [ ] test if this is the correct return type
+const int (*const *getCellUniverse())[VERSE_W][VERSE_H] // TODO test if this is the correct return type
 {
     return (const int (* const*)[VERSE_W][VERSE_H])&cell_universe;
 }
 
+void setCellUniverse(const int (*const provided)[VERSE_W][VERSE_H]) // TODO implement
+{
 
-#ifdef _DEBUG_cellUniverse
+}
+
+
+#ifdef _DEBUG
 void versePrint(int (*verse)[VERSE_W][VERSE_H])
 {
     for (int i = 0; i < VERSE_W; i++)
