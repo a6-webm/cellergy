@@ -15,8 +15,8 @@ typedef struct field_vector
 bool isInit {false};
 bool isUniverse1 { false };
 
-const int VERSE_W;
-const int VERSE_H;
+// const int VERSE_W;
+// const int VERSE_H;
 
 int sub_cell_values_1[VERSE_W][VERSE_H];
 int sub_cell_values_2[VERSE_W][VERSE_H];
@@ -95,6 +95,17 @@ void versePrint(field_vector (*verse)[VERSE_W][VERSE_H])
         }
         std::cout << std::endl;
     }
+}
+
+void runFor(int numCycles)
+{
+    for (int i = 0; i < numCycles; i++)
+    {
+        versePrint(cell_universe);
+        step();
+        // [ ] add a sleep function here
+    }
+    std::cout << "Done. Ran for " << i << "cycles" << std::endl;
 }
 
 int main(int argc, char const *argv[])
