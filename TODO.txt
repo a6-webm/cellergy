@@ -1,0 +1,1 @@
+TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
