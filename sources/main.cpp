@@ -7,12 +7,36 @@
 
 #define WINDOW_TITLE "Window title"
 
-void raylibUIExample();
+void raylibUIExample_debug();
+void cellUniverseDisplayer_debug();
 
 int main()
 {
-
+    cellUniverseDisplayer_debug();
     return 0;
+}
+
+void cellUniverseDisplayer_debug()
+{
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
+    SetTargetFPS(30);
+
+    while (!WindowShouldClose())
+    {
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+
+        // TODO write loop for drawing verse
+
+        EndDrawing();
+
+        WaitTime(1000);
+
+        step();
+    }
+
+    CloseWindow();
 }
 
 void raylibUIExample()
