@@ -53,18 +53,19 @@ field_vector (&prevVerseFields())[VERSE_W][VERSE_H]
 // Updates the fields of the verse assuming a cell of strength "strength" is at ("x","y")
 void updateFields(int x, int y, int strength) // TODO untested
 {
+    field_vector (&verseF)[VERSE_W][VERSE_H] = currVerseFields();
     for (int d_y = -strength + 1; d_y <= strength - 1; ++d_y)
         for(int d_x = -(strength - abs(d_y) - 1); d_x <= strength - abs(d_y) - 1; ++d_x)
         {
             if (d_x < 0)
-                currVerseFields()[x + d_x][y + d_y].x += -strength - d_x;
+                verseF[x + d_x][y + d_y].x += -strength - d_x;
             else if (d_x != 0)
-                currVerseFields()[x + d_x][y + d_y].x += strength - d_x;
+                verseF[x + d_x][y + d_y].x += strength - d_x;
 
             if (d_y < 0)
-                currVerseFields()[x + d_x][y + d_y].y += -strength - d_y;
+                verseF[x + d_x][y + d_y].y += -strength - d_y;
             else if (d_y != 0)
-                currVerseFields()[x + d_x][y + d_y].y += strength - d_y;
+                verseF[x + d_x][y + d_y].y += strength - d_y;
         }
 }
 
@@ -96,7 +97,8 @@ const int (&getCellUniverseRef())[VERSE_W][VERSE_H]
 
 void setCellUniverse(int (&x)[VERSE_W][VERSE_H])
 {
+    int (&verse)[VERSE_W][VERSE_H] = currVerse();
     for (int i = 0; i < VERSE_W; ++i)
         for (int j = 0; j < VERSE_H; ++j)
-            currVerse()[i][j] = x[i][j];
+            verse[i][j] = x[i][j];
 }
