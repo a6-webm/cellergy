@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "cellUniverse.hpp"
+#include <cmath>
 #include <iostream>
 
 #define SCREEN_WIDTH (800)
@@ -27,7 +28,19 @@ void cellUniverseDisplayer_debug()
 
         ClearBackground(RAYWHITE);
 
-        // TODO write loop for drawing verse
+        const int (&verseView)[VERSE_W][VERSE_W] = getCellUniverseRef(); // TODO untested
+        for (int x = 0; x < VERSE_W; ++x)
+            for (int y = 0; y < VERSE_H; ++y)
+            {
+                int max_val = 400;
+                double freq = PI*2;
+                double v = (double)verseView[x][y] / max_val;
+                unsigned char r = round(sin(2 * PI * v + 2)) * 127 + 128;
+                unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
+                unsigned char b = round(sin(2 * PI * v + 4)) * 127 + 128;
+
+                DrawPixel(x,y,{r,g,b,255});
+            }
 
         EndDrawing();
 

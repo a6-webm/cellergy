@@ -73,7 +73,7 @@ void updateFields(int x, int y, int strength) // TODO untested
 void sim_cell(int x, int y) // TODO What even are we trying to do with the sim_cell() function lmao
 {
     field_vector field = prevVerseFields()[x][y];
-    
+
 }
 
 void step()
