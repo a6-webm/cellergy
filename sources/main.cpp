@@ -32,8 +32,8 @@ void cellUniverseDisplayer_debug()
         for (int x = 0; x < VERSE_W; ++x)
             for (int y = 0; y < VERSE_H; ++y)
             {
-                int max_val = 400;
-                double freq = PI*2;
+                int max_val = 35;
+
                 double v = (double)verseView[x][y] / max_val;
                 unsigned char r = round(sin(2 * PI * v + 2)) * 127 + 128;
                 unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
