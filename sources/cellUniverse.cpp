@@ -62,7 +62,7 @@ void step()
     isUniverse1 = !isUniverse1;
 
     // Clear new universe
-    memset((void *) currVerse(), 0, sizeof(currVerse())); // TODO test if this actually clears this
+    memset((void *) currVerse(), 0, sizeof(currVerse())); // TODONE test if this actually clears this
     memset((void *) currVerseFields(), 0, sizeof(currVerse()));
 
     // Simulate

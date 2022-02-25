@@ -11,20 +11,7 @@ void raylibUIExample();
 
 int main()
 {
-    int initVerse[VERSE_W][VERSE_H];
 
-    for (int i = 0; i < VERSE_W; ++i)
-        for (int j = 0; j < VERSE_H; ++j)
-            initVerse[i][j] = i * j;
-
-    setCellUniverse(initVerse);
-
-    for (int i = 0; i < VERSE_W; ++i)
-    {
-        for (int j = 0; j < VERSE_H; ++j)
-            std::cout << getCellUniverseRef()[i][j] << "|";
-        std::cout << std::endl;
-    }
     return 0;
 }
 
