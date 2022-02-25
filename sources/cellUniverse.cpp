@@ -72,7 +72,8 @@ void updateFields(int x, int y, int strength) // TODO untested
 // Simulates the action of the cell at coordinates (x,y)
 void sim_cell(int x, int y) // TODO What even are we trying to do with the sim_cell() function lmao
 {
-
+    field_vector field = prevVerseFields()[x][y];
+    
 }
 
 void step()
@@ -81,8 +82,8 @@ void step()
     isUniverse1 = !isUniverse1;
 
     // Clear new universe
-    memset((void *) currVerse(), 0, sizeof(currVerse())); // TODONE test if this actually clears this
-    memset((void *) currVerseFields(), 0, sizeof(currVerse()));
+    memset((void *) currVerse(), 0, sizeof(currVerse()));
+    memset((void *) currVerseFields(), 0, sizeof(currVerse())); // TODO test that this doesn't mess up cause structs
 
     // Simulate
     for (int i_x = 0; i_x < VERSE_W; ++i_x)
