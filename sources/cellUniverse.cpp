@@ -20,7 +20,7 @@ int sub_cell_values_2[VERSE_W][VERSE_H];
 field_vector sub_cell_fields_1[VERSE_W][VERSE_H];
 field_vector sub_cell_fields_2[VERSE_W][VERSE_H];
 
-const int CELL_MAX = INT_MAX/2;
+const int CELL_MAX = INT_MAX / 2;
 
 int (&currVerse())[VERSE_W][VERSE_H]
 {
@@ -48,6 +48,24 @@ field_vector (&prevVerseFields())[VERSE_W][VERSE_H]
     if (isUniverse1)
         return sub_cell_fields_2;
     return sub_cell_fields_1;
+}
+
+// Updates the fields of the verse assuming a cell of strength "strength" is at ("x","y")
+void updateFields(int x, int y, int strength) // TODO untested
+{
+    for (int d_y = -strength + 1; d_y <= strength - 1; ++d_y)
+        for(int d_x = -(strength - abs(d_y) - 1); d_x <= strength - abs(d_y) - 1; ++d_x)
+        {
+            if (d_x < 0)
+                currVerseFields()[x + d_x][y + d_y].x += -strength - d_x;
+            else if (d_x != 0)
+                currVerseFields()[x + d_x][y + d_y].x += strength - d_x;
+
+            if (d_y < 0)
+                currVerseFields()[x + d_x][y + d_y].y += -strength - d_y;
+            else if (d_y != 0)
+                currVerseFields()[x + d_x][y + d_y].y += strength - d_y;
+        }
 }
 
 // Simulates the action of the cell at coordinates (x,y)
