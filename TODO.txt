@@ -1,1 +1,5 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
+TODO implement Conway's game of life to test stuff
+
+tutorial for colour thingy https://krazydad.com/tutorials/makecolors.php
+check out https://www.youtube.com/c/SebastianLague/videos for inspiration on making cell things
