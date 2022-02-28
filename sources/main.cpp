@@ -2,6 +2,7 @@
 #include "cellUniverse.hpp"
 #include <cmath>
 #include <iostream>
+#include <random>
 
 #define SCREEN_WIDTH (800)
 #define SCREEN_HEIGHT (450)
@@ -13,10 +14,14 @@ void cellUniverseDisplayer_debug();
 
 int main()
 {
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<int> int_dist(0,1);
+
     int verseStart[VERSE_W][VERSE_W];
-    for (int x = 0; x < VERSE_W; ++x)
-        for (int y = 0; y < VERSE_H; ++y)
-            verseStart[x][y] = x*y;
+    for (auto & x : verseStart)
+        for (int & y : x)
+            y = int_dist(rng);
 
     setCellUniverse(verseStart);
     cellUniverseDisplayer_debug();
@@ -38,19 +43,25 @@ void cellUniverseDisplayer_debug()
         for (int x = 0; x < VERSE_W; ++x)
             for (int y = 0; y < VERSE_H; ++y)
             {
-                int max_val = 35;
+                if (verseView[x][y] == 0)
+                {
+                    DrawPixel(x,y,{0,0,0,255});
+                } else
+                {
+                    int max_val = 35;
 
-                double v = (double)verseView[x][y] / max_val;
-                unsigned char r = round(sin(2 * PI * v + 2)) * 127 + 128;
-                unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
-                unsigned char b = round(sin(2 * PI * v + 4)) * 127 + 128;
+                    double v = (double)verseView[x][y] / max_val;
+                    unsigned char r = round(sin(2 * PI * v + 2)) * 127 + 128;
+                    unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
+                    unsigned char b = round(sin(2 * PI * v + 4)) * 127 + 128;
 
-                DrawPixel(x,y,{r,g,b,255});
+                    DrawPixel(x,y,{r,g,b,255});
+                }
             }
 
         EndDrawing();
 
-        WaitTime(1000);
+        WaitTime(50);
 
         step();
     }

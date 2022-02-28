@@ -72,9 +72,24 @@ void updateFields(int x, int y, int strength) // TODO untested
 // Simulates the action of the cell at coordinates (x,y)
 void sim_cell(int x, int y) // TODO What even are we trying to do with the sim_cell() function lmao
 {
-    currVerse()[x][y] = prevVerse()[x][y];
-    currVerseFields()[x][y].x = prevVerseFields()[x][y].x;
-    currVerseFields()[x][y].y = prevVerseFields()[x][y].y;
+    int aliveCount = 0;
+    for (int d_y = -1; d_y <= 1; ++d_y)
+        for (int d_x = -1; d_x <= 1; ++d_x)
+            if (prevVerse()[x+d_x][y+d_y] > 0) ++aliveCount;
+
+    if (prevVerse()[x][y] == 0)
+    {
+        if (aliveCount == 3) currVerse()[x][y] = 1;
+    } else
+    {
+        if (aliveCount == 2 || aliveCount == 3)
+        {
+            if (prevVerse()[x][y] == CELL_MAX - 1)
+                currVerse()[x][y] = 1;
+            else
+                currVerse()[x][y] = prevVerse()[x][y] + 1;
+        }
+    }
 }
 
 void step()
@@ -87,8 +102,8 @@ void step()
     memset((void *) currVerseFields(), 0, sizeof(currVerse())); // TODO test that this doesn't mess up cause structs
 
     // Simulate
-    for (int i_x = 0; i_x < VERSE_W; ++i_x)
-        for (int i_y = 0; i_y < VERSE_H; ++i_y)
+    for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
+        for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
             sim_cell(i_x,i_y);
 }
 
