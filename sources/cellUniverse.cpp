@@ -72,8 +72,9 @@ void updateFields(int x, int y, int strength) // TODO untested
 // Simulates the action of the cell at coordinates (x,y)
 void sim_cell(int x, int y) // TODO What even are we trying to do with the sim_cell() function lmao
 {
-    field_vector field = prevVerseFields()[x][y];
-
+    currVerse()[x][y] = prevVerse()[x][y];
+    currVerseFields()[x][y].x = prevVerseFields()[x][y].x;
+    currVerseFields()[x][y].y = prevVerseFields()[x][y].y;
 }
 
 void step()
