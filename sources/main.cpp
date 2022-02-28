@@ -16,7 +16,7 @@ int main()
     int verseStart[VERSE_W][VERSE_W];
     for (int x = 0; x < VERSE_W; ++x)
         for (int y = 0; y < VERSE_H; ++y)
-            verseStart[x][y] = x*y*2;
+            verseStart[x][y] = x*y;
 
     setCellUniverse(verseStart);
     cellUniverseDisplayer_debug();

@@ -1,7 +1,7 @@
 // These can be modified
 // -----------------------
-const int VERSE_W = 5;
-const int VERSE_H = 5;
+const int VERSE_W = 400;
+const int VERSE_H = 400;
 // -----------------------
 
 // Performs one time step of the universe
