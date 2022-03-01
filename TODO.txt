@@ -3,3 +3,4 @@ TODO implement Conway's game of life to test stuff
 
 tutorial for colour thingy https://krazydad.com/tutorials/makecolors.php
 check out https://www.youtube.com/c/SebastianLague/videos for inspiration on making cell things
+https://github.com/raysan5/raylib/wiki/Working-with-CMake has CMake stuff
