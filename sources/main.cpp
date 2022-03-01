@@ -4,8 +4,8 @@
 #include <iostream>
 #include <random>
 
-#define SCREEN_WIDTH (800)
-#define SCREEN_HEIGHT (450)
+#define SCREEN_WIDTH (900)
+#define SCREEN_HEIGHT (802)
 
 #define WINDOW_TITLE "Window title"
 
@@ -33,20 +33,22 @@ void cellUniverseDisplayer_debug()
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(30);
 
+    RenderTexture2D target = LoadRenderTexture(SCREEN_WIDTH, SCREEN_HEIGHT);
+    const int idk_w = (SCREEN_HEIGHT * VERSE_W) / VERSE_H - 2;
+    const int idk_h = SCREEN_HEIGHT - 2;
+
     while (!WindowShouldClose())
     {
-        BeginDrawing();
+        BeginTextureMode(target);
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
+        DrawRectangleLines(0,0,idk_w+2,idk_h+2,WHITE);
 
         const int (&verseView)[VERSE_W][VERSE_W] = getCellUniverseRef(); // TODO untested
         for (int x = 0; x < VERSE_W; ++x)
             for (int y = 0; y < VERSE_H; ++y)
             {
-                if (verseView[x][y] == 0)
-                {
-                    DrawPixel(x,y,{0,0,0,255});
-                } else
+                if (verseView[x][y] != 0)
                 {
                     int max_val = 35;
 
@@ -55,13 +57,23 @@ void cellUniverseDisplayer_debug()
                     unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
                     unsigned char b = round(sin(2 * PI * v + 4)) * 127 + 128;
 
-                    DrawPixel(x,y,{r,g,b,255});
+                    int x_out = (x*idk_w)/VERSE_W + 1;
+                    int y_out = (y*idk_h)/VERSE_H + 1;
+                    int width_out = idk_w/VERSE_W;
+                    int height_out = idk_h/VERSE_H;
+
+                    DrawRectangle(x_out,y_out,width_out,height_out,{r,g,b,255});
                 }
             }
+        EndTextureMode();
+
+        BeginDrawing();
+
+        DrawTextureRec(target.texture, (Rectangle) { 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2) { 0, 0 }, WHITE);
 
         EndDrawing();
 
-        WaitTime(50);
+        WaitTime(100);
 
         step();
     }
