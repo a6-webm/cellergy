@@ -44,7 +44,7 @@ void cellUniverseDisplayer_debug()
         ClearBackground(BLACK);
         DrawRectangleLines(0,0,idk_w+2,idk_h+2,WHITE);
 
-        const int (&verseView)[VERSE_W][VERSE_W] = getCellUniverseRef(); // TODO untested
+        const int (&verseView)[VERSE_W][VERSE_W] = getCellUniverseRef();
         for (int x = 0; x < VERSE_W; ++x)
             for (int y = 0; y < VERSE_H; ++y)
             {
