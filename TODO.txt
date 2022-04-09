@@ -1,5 +1,12 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
+TODO implement fields being calculated and a cell system of this:
+    - maybe split the number line into different elements
+    - e.g. 0-100 neutral, 100-1000 heat, 1000-10000 ice, etc
+    - have each cell want to tend towards a point in their energy range (e.g. all neutral energy wants to tend towards 30)
+    - energy moves one tile in the direction of a field?
+
+
 TODONE implement Conway's game of life to test stuff
 
 
