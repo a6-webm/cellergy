@@ -5,8 +5,7 @@
 #include <iostream>
 #include "cellUniverse.hpp"
 
-typedef struct field_vector
-{
+typedef struct field_vector {
     int x;
     int y;
 } field_vector;
@@ -22,41 +21,35 @@ field_vector sub_cell_fields_2[VERSE_W][VERSE_H];
 
 const int CELL_MAX = INT_MAX / 2;
 
-int (&currVerse())[VERSE_W][VERSE_H]
-{
+int (&currVerse())[VERSE_W][VERSE_H] {
     if (isUniverse1)
         return sub_cell_values_1;
     return sub_cell_values_2;
 }
 
-int (&prevVerse())[VERSE_W][VERSE_H]
-{
+int (&prevVerse())[VERSE_W][VERSE_H] {
     if (isUniverse1)
         return sub_cell_values_2;
     return sub_cell_values_1;
 }
 
-field_vector (&currVerseFields())[VERSE_W][VERSE_H]
-{
+field_vector (&currVerseFields())[VERSE_W][VERSE_H] {
     if (isUniverse1)
         return sub_cell_fields_1;
     return sub_cell_fields_2;
 }
 
-field_vector (&prevVerseFields())[VERSE_W][VERSE_H]
-{
+field_vector (&prevVerseFields())[VERSE_W][VERSE_H] {
     if (isUniverse1)
         return sub_cell_fields_2;
     return sub_cell_fields_1;
 }
 
 // Updates the fields of the verse assuming a cell of strength "strength" is at ("x","y")
-void updateFields(int x, int y, int strength) // TODO untested
-{
+void updateFields(int x, int y, int strength) { // TODO untested
     field_vector (&verseF)[VERSE_W][VERSE_H] = currVerseFields();
     for (int d_y = -strength + 1; d_y <= strength - 1; ++d_y)
-        for(int d_x = -(strength - abs(d_y) - 1); d_x <= strength - abs(d_y) - 1; ++d_x)
-        {
+        for(int d_x = -(strength - abs(d_y) - 1); d_x <= strength - abs(d_y) - 1; ++d_x) {
             if (d_x < 0)
                 verseF[x + d_x][y + d_y].x += -strength - d_x;
             else if (d_x != 0)
@@ -70,30 +63,11 @@ void updateFields(int x, int y, int strength) // TODO untested
 }
 
 // Simulates the action of the cell at coordinates (x,y)
-void sim_cell(int x, int y) // TODO What even are we trying to do with the sim_cell() function lmao
-{
-    int aliveCount = 0;
-    for (int d_y = -1; d_y <= 1; ++d_y)
-        for (int d_x = -1; d_x <= 1; ++d_x)
-            if (prevVerse()[x+d_x][y+d_y] > 0) ++aliveCount;
+void sim_cell(int x, int y) { // TODO What even are we trying to do with the sim_cell() function lmao
 
-    if (prevVerse()[x][y] == 0)
-    {
-        if (aliveCount == 3) currVerse()[x][y] = 1;
-    } else
-    {
-        if (aliveCount == 2 || aliveCount == 3)
-        {
-            if (prevVerse()[x][y] == CELL_MAX - 1)
-                currVerse()[x][y] = 1;
-            else
-                currVerse()[x][y] = prevVerse()[x][y] + 1;
-        }
-    }
 }
 
-void step()
-{
+void step() {
     // Swap current universe
     isUniverse1 = !isUniverse1;
 
@@ -107,13 +81,11 @@ void step()
             sim_cell(i_x,i_y);
 }
 
-const int (&getCellUniverseRef())[VERSE_W][VERSE_H]
-{
+const int (&getCellUniverseRef())[VERSE_W][VERSE_H] {
     return currVerse();
 }
 
-void setCellUniverse(int (&x)[VERSE_W][VERSE_H])
-{
+void setCellUniverse(int (&x)[VERSE_W][VERSE_H]) {
     int (&verse)[VERSE_W][VERSE_H] = currVerse();
     for (int i = 0; i < VERSE_W; ++i)
         for (int j = 0; j < VERSE_H; ++j)
