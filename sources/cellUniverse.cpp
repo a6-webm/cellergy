@@ -63,7 +63,12 @@ void updateFields(int x, int y, int strength) { // TODO untested
 }
 
 // Simulates the action of the cell at coordinates (x,y)
-void sim_cell(int x, int y) { // TODO What even are we trying to do with the sim_cell() function lmao
+void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
+
+
+}
+
+void calculate_field(int x, int y) { // TODO Implement this
 
 }
 
@@ -79,6 +84,11 @@ void step() {
     for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
         for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
             sim_cell(i_x,i_y);
+
+    // Populate fields
+    for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
+        for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
+            calculate_field(i_x,i_y);
 }
 
 const int (&getCellUniverseRef())[VERSE_W][VERSE_H] {
