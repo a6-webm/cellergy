@@ -70,7 +70,7 @@ void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
 
 }
 
-void calculate_field(int x, int y) { // TODO Implement this
+void calculate_field(int x, int y) { // TODO Implement this (because fields need to be calculated before cells move)
 
 }
 
