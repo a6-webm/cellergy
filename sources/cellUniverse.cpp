@@ -5,7 +5,7 @@
 #include <iostream>
 #include "cellUniverse.hpp"
 
-bool isInit {false};
+bool isNewUniverse { false };
 bool isUniverse1 { false };
 
 int sub_cell_values_1[VERSE_W][VERSE_H];
@@ -46,8 +46,8 @@ void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
 }
 
 void calculate_field(int x, int y) { // TODO test this
-    field_vector (&verseF)[VERSE_W][VERSE_H] = prevVerseFields();
-    int strength = prevVerse()[x][y];
+    field_vector (&verseF)[VERSE_W][VERSE_H] = currVerseFields();
+    int strength = currVerse()[x][y];
 
     int end_d_y = strength - 1;
     int d_y = -end_d_y;
@@ -83,19 +83,24 @@ void step() {
     memset((void *) currVerse(), 0, sizeof(currVerse()));
     memset((void *) currVerseFields(), 0, sizeof(currVerse())); // TODO test that this doesn't mess up cause structs
 
-    // Populate fields
-    for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
-        for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
-            calculate_field(i_x,i_y);
+    if (isNewUniverse) { // Populate the new universe's fields
+        isUniverse1 = !isUniverse1;
+        for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
+            for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
+                calculate_field(i_x,i_y);
+        isUniverse1 = !isUniverse1;
+        isNewUniverse = false;
+    }
 
-    // Simulate
+    // Simulate new cells
     for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
         for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
             sim_cell(i_x,i_y);
-}
 
-const int (&getCellUniverseRef())[VERSE_W][VERSE_H] {
-    return currVerse();
+    // Populate new fields
+    for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
+        for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
+            calculate_field(i_x,i_y);
 }
 
 void setCellUniverse(int (&x)[VERSE_W][VERSE_H]) {
@@ -103,4 +108,13 @@ void setCellUniverse(int (&x)[VERSE_W][VERSE_H]) {
     for (int i = 0; i < VERSE_W; ++i)
         for (int j = 0; j < VERSE_H; ++j)
             verse[i][j] = x[i][j];
+    isNewUniverse = true;
+}
+
+const int (&getCellUniverseRef())[VERSE_W][VERSE_H] {
+    return currVerse();
+}
+
+const field_vector (&getFieldUniverse())[VERSE_W][VERSE_H] {
+    return currVerseFields();
 }
