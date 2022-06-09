@@ -5,12 +5,6 @@
 #include <iostream>
 #include "cellUniverse.hpp"
 
-typedef struct field_vector {
-    int x;
-    int y;
-} field_vector;
-
-
 bool isInit {false};
 bool isUniverse1 { false };
 
