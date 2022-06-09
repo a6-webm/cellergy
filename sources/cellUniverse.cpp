@@ -48,8 +48,9 @@ field_vector (&prevVerseFields())[VERSE_W][VERSE_H] {
 // Updates the fields of the verse assuming a cell of strength "strength" is at ("x","y")
 void updateFields(int x, int y, int strength) { // TODO untested
     field_vector (&verseF)[VERSE_W][VERSE_H] = currVerseFields();
-    for (int d_y = -strength + 1; d_y <= strength - 1; ++d_y)
-        for(int d_x = -(strength - abs(d_y) - 1); d_x <= strength - abs(d_y) - 1; ++d_x) {
+    for (int d_y = -strength + 1; d_y <= strength - 1; ++d_y) {
+        int end = strength - abs(d_y) - 1;
+        for(int d_x = -(strength - abs(d_y) - 1); d_x <= end; ++d_x) {
             if (d_x < 0)
                 verseF[x + d_x][y + d_y].x += -strength - d_x;
             else if (d_x != 0)
@@ -60,6 +61,7 @@ void updateFields(int x, int y, int strength) { // TODO untested
             else if (d_y != 0)
                 verseF[x + d_x][y + d_y].y += strength - d_y;
         }
+    }
 }
 
 // Simulates the action of the cell at coordinates (x,y)
