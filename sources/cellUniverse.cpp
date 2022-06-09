@@ -54,19 +54,30 @@ void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
 void calculate_field(int x, int y) { // TODO test this
     field_vector (&verseF)[VERSE_W][VERSE_H] = prevVerseFields();
     int strength = prevVerse()[x][y];
-    for (int d_y = -strength + 1; d_y <= strength - 1; ++d_y) {
-        int end = strength - abs(d_y) - 1;
-        for(int d_x = -(strength - abs(d_y) - 1); d_x <= end; ++d_x) {
+
+    int end_d_y = strength - 1;
+    int d_y = -end_d_y;
+    if (y+d_y < 0) d_y = -y;
+    if (y+end_d_y >= VERSE_H) end_d_y = (VERSE_H - 1) - y;
+    while(d_y <= end_d_y) {
+        int end_d_x = strength - abs(d_y) - 1;
+        int d_x = -end_d_x;
+        if (x+d_x < 0) d_x = -x;
+        if (x+end_d_x >= VERSE_W) end_d_x = (VERSE_W - 1) - x;
+        while (d_x <= end_d_x) {
             if (d_x < 0)
                 verseF[x + d_x][y + d_y].x += -strength - d_x;
-            else if (d_x != 0)
+            else if (d_x > 0)
                 verseF[x + d_x][y + d_y].x += strength - d_x;
 
             if (d_y < 0)
                 verseF[x + d_x][y + d_y].y += -strength - d_y;
-            else if (d_y != 0)
+            else if (d_y > 0)
                 verseF[x + d_x][y + d_y].y += strength - d_y;
+
+            ++d_x;
         }
+        ++d_y;
     }
 }
 
