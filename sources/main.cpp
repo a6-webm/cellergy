@@ -28,41 +28,51 @@ int main()
     return 0;
 }
 
-void cellUniverseDisplayer_debug()
+void cellUniverseDisplayer_debug() // TODO test
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(30);
 
-    RenderTexture2D target = LoadRenderTexture(SCREEN_WIDTH, SCREEN_HEIGHT);
-    const int idk_w = (SCREEN_HEIGHT * VERSE_W) / VERSE_H - 2;
-    const int idk_h = SCREEN_HEIGHT - 2;
+    RenderTexture2D target = LoadRenderTexture(VERSE_W*4, VERSE_H*4);
 
     while (!WindowShouldClose())
     {
         BeginTextureMode(target);
 
         ClearBackground(BLACK);
-        DrawRectangleLines(0,0,idk_w+2,idk_h+2,WHITE);
 
         const int (&verseView)[VERSE_W][VERSE_W] = getCellUniverseRef();
-        for (int x = 0; x < VERSE_W; ++x)
-            for (int y = 0; y < VERSE_H; ++y)
+        const field_vector (&fieldView)[VERSE_W][VERSE_H] = getFieldUniverse();
+        for (int x = 0; x < VERSE_W; x++)
+            for (int y = 0; y < VERSE_H; y++)
             {
-                if (verseView[x][y] != 0)
-                {
-                    int max_val = 35;
+                int twox = 2*x;
+                int twoy = 2*y;
 
-                    double v = (double)verseView[x][y] / max_val;
-                    unsigned char r = round(sin(2 * PI * v + 2)) * 127 + 128;
-                    unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
-                    unsigned char b = round(sin(2 * PI * v + 4)) * 127 + 128;
+                int repeat_val = 35;
+                double v = (double)verseView[x][y] / repeat_val;
+                unsigned char r = round(sin(2 * PI * v + 2)) * 127 + 128;
+                unsigned char g = round(sin(2 * PI * v + 0)) * 127 + 128;
+                unsigned char b = round(sin(2 * PI * v + 4)) * 127 + 128;
 
-                    int x_out = (x*idk_w)/VERSE_W + 1;
-                    int y_out = (y*idk_h)/VERSE_H + 1;
-                    int width_out = idk_w/VERSE_W;
-                    int height_out = idk_h/VERSE_H;
+                DrawRectangle(twox,twoy,2,2,{r,g,b,255});
 
-                    DrawRectangle(x_out,y_out,width_out,height_out,{r,g,b,255});
+                field_vector field = fieldView[x][y];
+                repeat_val = 200;
+                v = ((double)abs(field.x) + abs(field.y)) / repeat_val;
+                r = round(sin(2 * PI * v + 2)) * 127 + 128;
+                g = round(sin(2 * PI * v + 0)) * 127 + 128;
+                b = round(sin(2 * PI * v + 4)) * 127 + 128;
+
+                if (field.x == 0 && field.y == 0) {
+                    DrawPixel(twox,twoy,{0,0,0,255});
+                    DrawPixel(twox,twoy,{0,0,0,255});
+                } else {
+                    int dx = field.x > 0 ? 1 : 0;
+                    int dy = field.y > 0 ? 1 : 0;
+                    int wid = field.x == 0 ? 2 : 1;
+                    int hei = field.y == 0 ? 2 : 1;
+                    DrawRectangle(twox+dx,twoy+dy,wid,hei,{r,g,b,255});
                 }
             }
         EndTextureMode();
