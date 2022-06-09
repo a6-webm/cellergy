@@ -15,8 +15,8 @@ void step();
 // Set the current universe, provided array must not disappear
 void setCellUniverse(int (&x)[VERSE_W][VERSE_H]);
 
-// Get a pointer to a pointer to the current cell universe
+// Get a reference to the current cell universe
 const int (&getCellUniverseRef())[VERSE_W][VERSE_H];
 
-// Get a pointer to a pointer to the current field universe
+// Get a reference to the current field universe
 const field_vector (&getFieldUniverse())[VERSE_W][VERSE_H];
