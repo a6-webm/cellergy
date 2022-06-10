@@ -29,7 +29,7 @@ int main()
     return 0;
 }
 
-void cellUniverseDisplayer_debug() // TODO test
+void cellUniverseDisplayer_debug() // TODO make cells and fields more distinguishable
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(30);
