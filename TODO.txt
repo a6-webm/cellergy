@@ -1,16 +1,16 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
-TODO implement fields being calculated and a cell system of this:
-    - maybe split the number line into different elements
-    - e.g. 0-100 neutral, 100-1000 heat, 1000-10000 ice, etc
-    - have each cell want to tend towards a point in their energy range (e.g. all neutral energy wants to tend towards 30)
-    - energy moves one tile in the direction of a field?
-
 
 TODONE implement Conway's game of life to test stuff
 
 
 Notes:
+basically a factorio-like (start from nothing, use resources to make new resources, towards some final goal resource)
+but, the whole world is a cellular automata universe
+and you are a cell that can move with wasd
+and ambling about everywhere are dumb cells (move randomly, benign)
+and your player character can modify cells to have different behaviours, e.g. attract to other cells, move away from other cells, conway's game of life, etc
+
 Fields like a gravitational field are a no go, they take waaaaay too long to calculate
 
 Terraria small worlds are 1200w x 4200h, so first test would be one cell per block, and if that goes super well, 4 cells per block, etc
