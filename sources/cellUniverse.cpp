@@ -134,13 +134,13 @@ void step() {
     memset((void *) currVerse(), 0, sizeof(currVerse()));
     memset((void *) currVerseFields(), 0, sizeof(currVerse())); // TODO test that this doesn't mess up cause structs
 
-    if (isNewUniverse) { // Populate the new universe's fields
+    if (isNewUniverse) { // Only generate fields
         isUniverse1 = !isUniverse1;
         for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
             for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
                 calculate_field(i_x,i_y);
-        isUniverse1 = !isUniverse1;
         isNewUniverse = false;
+        return;
     }
 
     // Simulate new cells
