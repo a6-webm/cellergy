@@ -4,8 +4,8 @@
 #include <iostream>
 #include <random>
 
-#define SCREEN_WIDTH (800)
-#define SCREEN_HEIGHT (800)
+#define SCREEN_WIDTH (1200)
+#define SCREEN_HEIGHT (1200)
 
 #define WINDOW_TITLE "Window title"
 
@@ -17,12 +17,12 @@ int main()
     std::random_device dev;
     std::mt19937 rng(dev());
 //    std::uniform_int_distribution<int> int_dist(0,1);
-    std::binomial_distribution<int> binom_dist(1,.01);
+    std::binomial_distribution<int> binom_dist(4,.2);
 
     int verseStart[VERSE_W][VERSE_W];
     for (auto & x : verseStart)
         for (int & y : x)
-            y = binom_dist(rng) * 9;
+            y = binom_dist(rng) * 6;
 
     setCellUniverse(verseStart);
     cellUniverseDisplayer_debug();
@@ -98,7 +98,7 @@ void cellUniverseDisplayer_debug()
                         {0,0,(float)target.texture.width,(float)-target.texture.height},
                         0,0,0,0,0
                         },
-                { 0, 0, 800, 800 },
+                { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT },
                 { 0, 0 },
                 0,
                 WHITE
