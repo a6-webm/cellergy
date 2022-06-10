@@ -44,7 +44,7 @@ field_vector (&prevVerseFields())[VERSE_W][VERSE_H] {
 }
 
 // Simulates the action of the cell at coordinates (x,y)
-void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
+void sim_cell(int x, int y) {
     const int (&prevV)[VERSE_W][VERSE_W] = prevVerse();
     const field_vector (&prevF)[VERSE_W][VERSE_H] = prevVerseFields();
     int (&currV)[VERSE_W][VERSE_W] = currVerse();
@@ -53,7 +53,7 @@ void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
     int strength = prevV[x][y];
 
     if (strength <= 0) return;
-    if (strength < 3) {
+    if (strength < 10) {
         int dx, dy = 0;
         if (field.x == 0 && field.y == 0) {
             std::uniform_int_distribution<int> dis(-1, 1);
@@ -88,10 +88,8 @@ void sim_cell(int x, int y) { // TODO Implement this from TODO.txt
         }
         if (x + dx < 0 || x + dx >= VERSE_W) dx = 0;
         if (y + dy < 0 || y + dy >= VERSE_H) dy = 0;
-        if (dx != 0 || dy != 0) {
-            currV[x][y] += strength/2;
-            currV[x+dx][y+dy] += strength - strength/2;
-        }
+        currV[x][y] += strength/2;
+        currV[x+dx][y+dy] += strength - strength/2;
         return;
     }
 }
@@ -132,25 +130,25 @@ void step() {
 
     // Clear new universe
     memset((void *) currVerse(), 0, sizeof(currVerse()));
-    memset((void *) currVerseFields(), 0, sizeof(currVerseFields())); // TODO test that this doesn't mess up cause structs
+    memset((void *) currVerseFields(), 0, sizeof(currVerseFields()));
 
     if (isNewUniverse) { // Only generate fields
         isUniverse1 = !isUniverse1;
-        for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
-            for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
+        for (int i_x = 0; i_x < VERSE_W; ++i_x)
+            for (int i_y = 0; i_y < VERSE_H; ++i_y)
                 calculate_field(i_x,i_y);
         isNewUniverse = false;
         return;
     }
 
     // Simulate new cells
-    for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
-        for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
+    for (int i_x = 0; i_x < VERSE_W; ++i_x)
+        for (int i_y = 0; i_y < VERSE_H; ++i_y)
             sim_cell(i_x,i_y);
 
     // Populate new fields
-    for (int i_x = 1; i_x < VERSE_W - 1; ++i_x)
-        for (int i_y = 1; i_y < VERSE_H - 1; ++i_y)
+    for (int i_x = 0; i_x < VERSE_W; ++i_x)
+        for (int i_y = 0; i_y < VERSE_H; ++i_y)
             calculate_field(i_x,i_y);
 }
 
