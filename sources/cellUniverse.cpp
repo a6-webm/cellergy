@@ -94,7 +94,7 @@ void sim_cell(int x, int y) {
     }
 }
 
-void calculate_field(int x, int y) { // TODO test this
+void calculate_field(int x, int y) {
     field_vector (&verseF)[VERSE_W][VERSE_H] = currVerseFields();
     int strength = currVerse()[x][y];
 
