@@ -17,19 +17,19 @@ int main()
     std::random_device dev;
     std::mt19937 rng(dev());
 //    std::uniform_int_distribution<int> int_dist(0,1);
-    std::binomial_distribution<int> binom_dist(1,.5);
+    std::binomial_distribution<int> binom_dist(1,.01);
 
     int verseStart[VERSE_W][VERSE_W];
     for (auto & x : verseStart)
         for (int & y : x)
-            y = binom_dist(rng);
+            y = binom_dist(rng) * 9;
 
     setCellUniverse(verseStart);
     cellUniverseDisplayer_debug();
     return 0;
 }
 
-void cellUniverseDisplayer_debug() // TODO make cells and fields more distinguishable
+void cellUniverseDisplayer_debug()
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(30);
