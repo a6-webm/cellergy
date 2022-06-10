@@ -1,7 +1,7 @@
 // These can be modified
 // -----------------------
-const int VERSE_W = 200;
-const int VERSE_H = 200;
+const int VERSE_W = 50;
+const int VERSE_H = 50;
 // -----------------------
 
 typedef struct field_vector {
