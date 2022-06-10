@@ -1,5 +1,7 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
+TODO implement a player character
+TODO implement a player camera
 
 TODONE implement Conway's game of life to test stuff
 
