@@ -83,7 +83,7 @@ void cellUniverseDisplayer_debug() // TODO test
 
         EndDrawing();
 
-        WaitTime(100);
+        while(!IsKeyPressed(KEY_SPACE)) {}
 
         step();
     }
