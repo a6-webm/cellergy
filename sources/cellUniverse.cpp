@@ -132,7 +132,7 @@ void step() {
 
     // Clear new universe
     memset((void *) currVerse(), 0, sizeof(currVerse()));
-    memset((void *) currVerseFields(), 0, sizeof(currVerse())); // TODO test that this doesn't mess up cause structs
+    memset((void *) currVerseFields(), 0, sizeof(currVerseFields())); // TODO test that this doesn't mess up cause structs
 
     if (isNewUniverse) { // Only generate fields
         isUniverse1 = !isUniverse1;
