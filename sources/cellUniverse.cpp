@@ -53,19 +53,19 @@ void sim_cell(int x, int y) {
     int strength = prevV[x][y];
 
     if (strength <= 0) return;
-    if (strength < 10) {
+    if (strength < 15) {
         int dx, dy = 0;
         if (field.x == 0 && field.y == 0) {
             std::uniform_int_distribution<int> dis(-1, 1);
             dx = dis(gen);
             dy = dis(gen);
         } else {
-            if (field.x > 0) dx = 1;
+            if (field.x > 0) dx = -1;
             else if (field.x == 0) dx = 0;
-            else dx = -1;
-            if (field.y > 0) dy = 1;
+            else dx = 1;
+            if (field.y > 0) dy = -1;
             else if (field.y == 0) dy = 0;
-            else dy = -1;
+            else dy = 1;
         }
         if (x + dx < 0 || x + dx >= VERSE_W) dx = 0;
         if (y + dy < 0 || y + dy >= VERSE_H) dy = 0;
