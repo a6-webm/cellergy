@@ -11,6 +11,8 @@ TODONE implement Conway's game of life to test stuff
 
 
 Notes:
+Fields like a gravitational field are a no go, they take waaaaay too long to calculate
+
 Terraria small worlds are 1200w x 4200h, so first test would be one cell per block, and if that goes super well, 4 cells per block, etc
 
 tutorial for colour thingy https://krazydad.com/tutorials/makecolors.php
