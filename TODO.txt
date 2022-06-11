@@ -1,5 +1,6 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
+TODO there was an error building, something about GLOB lol
 TODO make sure cellUniverse.cpp is acting as the MODEL
 TODO implement a view/render file that draws everything to the screen, acting as the VIEW
 TODO implement a player file as a CONTROLLER that passes camera and status data to the VIEW
