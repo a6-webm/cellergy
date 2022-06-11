@@ -45,7 +45,7 @@ void drawFrame(frame_data frData){
     if (frData.reDrawUniverse) reDrawUniverse(frData);
 
     BeginDrawing();
-//    ClearBackground(WHITE);
+    ClearBackground(WHITE); //TODO keep in mind, this line only needed so empty texture doesn't flash screen black and white
     DrawTextureNPatch(
             universeTexture.texture,
             {
