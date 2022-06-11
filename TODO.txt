@@ -1,7 +1,8 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
-TODO implement a player character
-TODO implement a player camera
+TODO make sure cellUniverse.cpp is acting as the MODEL
+TODO implement a view/render file that draws everything to the screen, acting as the VIEW
+TODO implement a player file as a CONTROLLER that passes camera and status data to the VIEW
 
 TODONE implement Conway's game of life to test stuff
 
