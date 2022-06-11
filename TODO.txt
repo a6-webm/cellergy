@@ -1,7 +1,7 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
-TODO make sure cellUniverse.cpp is acting as the MODEL
 TODO implement a player file as a CONTROLLER that passes camera and status data to the VIEW
+TODO make sure cellUniverse.cpp is acting as the MODEL
 
 TODO Fix all clang-tidy warnings
 
