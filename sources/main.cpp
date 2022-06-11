@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "cellUniverse.hpp"
+#include "view.hpp"
 #include <cmath>
 #include <iostream>
 #include <random>
