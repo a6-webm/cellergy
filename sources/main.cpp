@@ -7,8 +7,8 @@
 #include <iostream>
 #include <random>
 
-#define SCREEN_WIDTH (1200)
-#define SCREEN_HEIGHT (1200)
+#define SCREEN_WIDTH (900)
+#define SCREEN_HEIGHT (900)
 
 #define WINDOW_TITLE "Window title"
 
@@ -29,7 +29,7 @@ int main()
             y = binom_dist(rng) * 6;
 
     setCellUniverse(verseStart);
-    cellUniverseDisplayer_debug();
+    mvcLoop();
     return 0;
 }
 
