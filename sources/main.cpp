@@ -1,4 +1,6 @@
+#ifndef RAYLIB_H
 #include "raylib.h"
+#endif
 #include "cellUniverse.hpp"
 #include "view.hpp"
 #include <cmath>

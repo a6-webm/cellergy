@@ -1,3 +1,4 @@
+#pragma once
 // These can be modified
 // -----------------------
 const int VERSE_W = 400;

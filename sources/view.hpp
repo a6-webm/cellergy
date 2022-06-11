@@ -1,3 +1,8 @@
+#pragma once
+#ifndef RAYLIB_H
+#include "raylib.h"
+#endif
+
 typedef struct frame_data {
     unsigned int screen_width, screen_height;
     typedef struct Box {unsigned int left; unsigned int right; unsigned int top; unsigned int bottom;} Box;
