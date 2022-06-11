@@ -12,6 +12,7 @@
 
 void raylibUIExample_debug();
 void cellUniverseDisplayer_debug();
+void mvcLoop();
 
 int main()
 {
@@ -28,6 +29,34 @@ int main()
     setCellUniverse(verseStart);
     cellUniverseDisplayer_debug();
     return 0;
+}
+
+void mvcLoop() {
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
+    SetTargetFPS(30);
+
+    bool init = true;
+
+    frame_data frData = {
+            SCREEN_WIDTH, SCREEN_HEIGHT,
+            {0,VERSE_W-1,0,VERSE_H-1},
+            false,
+            {0,0,VERSE_W,VERSE_H},
+            0
+            };
+
+    while (!WindowShouldClose())
+    {
+        frData.reDrawUniverse = false;
+        if (IsKeyPressed(KEY_SPACE) || IsKeyDown(KEY_N)) {
+            step();
+            frData.reDrawUniverse = true;
+        }
+
+        drawFrame(frData);
+    }
+
+    CloseWindow();
 }
 
 void cellUniverseDisplayer_debug()
