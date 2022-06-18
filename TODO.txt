@@ -1,5 +1,7 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
+TODO change view to use DrawTexturePro()
+TODO change view to calculate "draw" itself (probably double the size of the view)
 TODO implement a player file/main code as a CONTROLLER that passes camera and status data to the VIEW
 TODO make sure cellUniverse.cpp is acting as the MODEL
 
