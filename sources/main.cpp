@@ -39,18 +39,40 @@ void mvcLoop() {
 
     frame_data frData = {
             SCREEN_WIDTH, SCREEN_HEIGHT,
-            {0,VERSE_W-1,0,VERSE_H-1},
+            {100,100,32,32},
+            2.0f,
             false,
-            {0,0,VERSE_W,VERSE_H},
             0
             };
 
+    typedef struct Player {
+        int x;
+        int y;
+
+    } Player;
+
     while (!WindowShouldClose())
     {
-        frData.reDrawUniverse = false;
+        if (IsKeyDown(KEY_W)) frData.view.y -= .5f;
+        if (IsKeyDown(KEY_S)) frData.view.y += .5f;
+        if (IsKeyDown(KEY_A)) frData.view.x -= .5f;
+        if (IsKeyDown(KEY_D)) frData.view.x += .5f;
+
+        if (IsKeyDown(KEY_Q)) {
+            frData.view.width -= 2.0f;
+            frData.view.height -= 2.0f;
+            if (frData.view.width < 0) frData.view.width = 0.0f;
+            if (frData.view.height < 0) frData.view.height = 0.0f;
+        }
+        if (IsKeyDown(KEY_E)) {
+            frData.view.width += 2.0f;
+            frData.view.height += 2.0f;
+        }
+
+        frData.universeStepped = false;
         if (IsKeyPressed(KEY_SPACE) || IsKeyDown(KEY_N)) {
             step();
-            frData.reDrawUniverse = true;
+            frData.universeStepped = true;
         }
 
         drawFrame(frData);
