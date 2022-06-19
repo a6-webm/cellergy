@@ -1,12 +1,13 @@
 TODO might remove .gitattributes making assets into binary files, cause u don't need those sitting on github I don't think idk
 
-TODO change view to use DrawTexturePro()
-TODO change view to calculate "draw" itself (probably double the size of the view)
+TODO look into the 2dCamera funtionality of Raylib, might need to be implemented
 TODO implement a player file/main code as a CONTROLLER that passes camera and status data to the VIEW
 TODO make sure cellUniverse.cpp is acting as the MODEL
 
 TODO Fix all clang-tidy warnings
 
+TODONE change view to use DrawTexturePro()
+TODONE change view to calculate "draw" itself (probably double the size of the view)
 TODONE implement a view/render file that draws everything to the screen, acting as the VIEW
 TODONE there was an error building, something about GLOB lol: just delete the cmake-build folder and rebuild
 TODONE implement Conway's game of life to test stuff
