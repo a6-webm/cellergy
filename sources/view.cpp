@@ -10,18 +10,21 @@ struct Box {T left; T right; T top; T bottom;};
 Box<unsigned int> lastDraw = {0,0,0,0};
 Box<float> lastRenderedView = {0, 0, 0, 0};
 
-void reDrawUniverse(frame_data frData) {
-    lastRenderedView.left = frData.view.x - (frData.renderRange * frData.view.width + 1);
-    lastRenderedView.right = frData.view.x + ((frData.renderRange + 1) * frData.view.width + 1);
-    lastRenderedView.top = frData.view.y - (frData.renderRange * frData.view.height + 1);
-    lastRenderedView.bottom = frData.view.y + ((frData.renderRange + 1) * frData.view.height + 1);
+void reDrawUniverse(frame_data frData, bool resizeVerseTexture) {
+    if (resizeVerseTexture) {
+        lastRenderedView.left = frData.view.x - (frData.renderRange * frData.view.width + 1);
+        lastRenderedView.right = frData.view.x + ((frData.renderRange + 1) * frData.view.width + 1);
+        lastRenderedView.top = frData.view.y - (frData.renderRange * frData.view.height + 1);
+        lastRenderedView.bottom = frData.view.y + ((frData.renderRange + 1) * frData.view.height + 1);
 
-    lastDraw.left = std::min((unsigned int)VERSE_W-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.left)));
-    lastDraw.right = std::min((unsigned int)VERSE_W-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.right)));
-    lastDraw.top = std::min((unsigned int)VERSE_H-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.top)));
-    lastDraw.bottom = std::min((unsigned int)VERSE_H-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.bottom)));
+        lastDraw.left = std::min((unsigned int)VERSE_W-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.left)));
+        lastDraw.right = std::min((unsigned int)VERSE_W-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.right)));
+        lastDraw.top = std::min((unsigned int)VERSE_H-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.top)));
+        lastDraw.bottom = std::min((unsigned int)VERSE_H-1, static_cast<unsigned int>(std::max(0.0f, lastRenderedView.bottom)));
 
-    universeTexture = LoadRenderTexture(lastDraw.right-lastDraw.left+1, lastDraw.bottom-lastDraw.top+1);
+        universeTexture = LoadRenderTexture(lastDraw.right-lastDraw.left+1, lastDraw.bottom-lastDraw.top+1);
+        std::cout << "resized verseTexture" << std::endl;
+    }
 
     BeginTextureMode(universeTexture);
 
@@ -55,15 +58,13 @@ void drawUI(frame_data data) {
 }
 
 void drawFrame(frame_data frData){
-    if (
-            frData.universeStepped
-         || frData.view.x < lastRenderedView.left
-         || frData.view.y < lastRenderedView.top
-         || frData.view.x + frData.view.width > lastRenderedView.right
-         || frData.view.y + frData.view.height > lastRenderedView.bottom
-       ) {
-        reDrawUniverse(frData);
-        std::cout << "Universe redrawn" << std::endl;
+    bool resizeVerseTexture = frData.view.x < lastRenderedView.left
+                           || frData.view.y < lastRenderedView.top
+                           || frData.view.x + frData.view.width > lastRenderedView.right
+                           || frData.view.y + frData.view.height > lastRenderedView.bottom;
+    if (frData.universeStepped || resizeVerseTexture) {
+        reDrawUniverse(frData, resizeVerseTexture);
+        std::cout << "redrew Universe" << std::endl;
     }
     BeginDrawing();
     ClearBackground(WHITE); //TODO keep in mind, this line only needed so empty texture doesn't flash screen black and white
