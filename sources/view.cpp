@@ -58,6 +58,7 @@ void drawUI(frame_data data) {
 }
 
 void drawFrame(frame_data frData){
+	// TODO resize verse if view.width is sufficiently smaller than lastView.width
     bool resizeVerseTexture = frData.view.x < lastRenderedView.left
                            || frData.view.y < lastRenderedView.top
                            || frData.view.x + frData.view.width > lastRenderedView.right
