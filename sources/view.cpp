@@ -65,8 +65,9 @@ void drawFrame(frame_data frData){
                                  || frData.view.y < lastRenderedView.top
                                  || frData.view.x + frData.view.width > lastRenderedView.right
                                  || frData.view.y + frData.view.height > lastRenderedView.bottom;
-    bool viewIsSmall = frData.view.width < lastViewSize.x/2
-                        || frData.view.height < lastViewSize.y/2;
+    float zoomInReRenderMult = 2.0f;
+    bool viewIsSmall = frData.view.width < lastViewSize.x/zoomInReRenderMult
+                        || frData.view.height < lastViewSize.y/zoomInReRenderMult;
     if (frData.universeStepped || viewOutsideOfLastView || viewIsSmall) {
         reDrawUniverse(frData, viewOutsideOfLastView || viewIsSmall);
         std::cout << "redrew Universe" << std::endl;
