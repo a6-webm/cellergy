@@ -1,6 +1,7 @@
 #pragma once
 #ifndef RAYLIB_H
 #include "raylib.h"
+#include "cellUniverse.hpp"
 #endif
 
 typedef struct frame_data {
@@ -9,6 +10,7 @@ typedef struct frame_data {
     float renderRange;
     bool universeStepped;
     unsigned char simState;
+    Player player;
 } frame_data;
 
 void drawFrame(frame_data frData);
