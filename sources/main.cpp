@@ -24,7 +24,7 @@ int main()
     int verseStart[VERSE_W][VERSE_W];
     for (auto & x : verseStart)
         for (int & y : x)
-            y = binom_dist(rng) * 6;
+            y = binom_dist(rng) * 2;
 
     setCellUniverse(verseStart);
     mvcLoop();
@@ -37,28 +37,50 @@ void mvcLoop() {
 
     bool init = true;
 
+    Player player = {100,100,2,false,10};
+
     frame_data frData = {
             SCREEN_WIDTH, SCREEN_HEIGHT,
             {100,100,32,32},
             2.0f,
             false,
-            0
+            0,
+            player
             };
 
-    typedef struct Player {
-        int x;
-        int y;
-        int moveSpeed;
-    } Player;
-    Player player = {100,100, 1};
     Vector2 viewTarget;
 
     while (!WindowShouldClose())
     {
-        if (IsKeyDown(KEY_W)) player.y -= player.moveSpeed;
-        if (IsKeyDown(KEY_S)) player.y += player.moveSpeed;
-        if (IsKeyDown(KEY_A)) player.x -= player.moveSpeed;
-        if (IsKeyDown(KEY_D)) player.x += player.moveSpeed;
+        bool doStep = false;
+        if (IsKeyPressed(KEY_SPACE) || IsKeyDown(KEY_N)) {
+            doStep = true;
+        }
+        int moveSpeed = 1;
+        if (IsKeyPressed(KEY_W)) {
+            player.y -= moveSpeed;
+            doStep = true;
+        }
+        if (IsKeyPressed(KEY_S)) {
+            player.y += moveSpeed;
+            doStep = true;
+        }
+        if (IsKeyPressed(KEY_A)) {
+            player.x -= moveSpeed;
+            doStep = true;
+        }
+        if (IsKeyPressed(KEY_D)) {
+            player.x += moveSpeed;
+            doStep = true;
+        }
+
+        frData.universeStepped = false;
+        if (doStep) {
+            player = step(player);
+            frData.universeStepped = true;
+        }
+
+        frData.player = player;
 
         float zoomRate = 0.03f;
         if (IsKeyDown(KEY_Q)) {
@@ -80,8 +102,6 @@ void mvcLoop() {
 
         viewTarget.x = player.x - frData.view.width/2;
         viewTarget.y = player.y - frData.view.height/2;
-
-
         float lerpRate = GetFrameTime()*4.0f;
         float lerpThresh = 0.01f;
         if (std::abs(viewTarget.x - frData.view.x) < lerpThresh) {
@@ -92,12 +112,6 @@ void mvcLoop() {
             frData.view.y = viewTarget.y;
         } else
             frData.view.y += lerpRate*(viewTarget.y - frData.view.y);
-
-        frData.universeStepped = false;
-        if (IsKeyPressed(KEY_SPACE) || IsKeyDown(KEY_N)) {
-            step();
-            frData.universeStepped = true;
-        }
 
         drawFrame(frData);
     }
