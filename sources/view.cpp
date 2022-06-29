@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include <cmath>
 #include <iostream>
+#include <sstream>
 
 RenderTexture2D universeTexture;
 template <typename T>
@@ -57,7 +58,11 @@ void reDrawUniverse(frame_data frData, bool resizeVerseTexture) {
 }
 
 void drawUI(frame_data data) {
-
+    std::stringstream str_strm("");
+    str_strm << "x:" << data.player.x << std::endl;
+    str_strm << "y:" << data.player.y << std::endl;
+    str_strm << "E:" << data.player.energy << std::endl;
+    DrawText(str_strm.str().c_str(),0,0,data.screen_height/10.0f,WHITE);
 }
 
 void drawFrame(frame_data frData){
