@@ -4,7 +4,7 @@
 #endif
 
 typedef struct frame_data {
-    unsigned int screen_width, screen_height;
+    int screen_width, screen_height;
     Rectangle view;
     float renderRange;
     bool universeStepped;
