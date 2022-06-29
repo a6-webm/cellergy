@@ -3,6 +3,7 @@ TODO might remove .gitattributes making assets into binary files, cause u don't 
 TODO look into the 2dCamera funtionality of Raylib, might need to be implemented
 TODO implement a player file/main code as a CONTROLLER that passes camera and status data to the VIEW
 TODO make sure cellUniverse.cpp is acting as the MODEL
+TODO check if the way you've written view utilises GPU
 
 TODO Fix all clang-tidy warnings
 
